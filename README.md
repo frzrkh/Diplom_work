@@ -1,1 +1,1 @@
-# diplom_work.py
+Онлайн интернет магазин телеграм бот - @UD_Dastavkabot
