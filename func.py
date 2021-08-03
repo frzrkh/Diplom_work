@@ -1,6 +1,6 @@
 from cons import *
-from menu import *
-from telegram import KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
+from menu import menu_button
+from telegram import KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup, update
 from sql_req import *
 import sqlite3
 from Users import User
@@ -9,7 +9,8 @@ from Users import users
 contact_button = [KeyboardButton('Отправить свой контакт ☎', request_contact=True)]
 location_button = [KeyboardButton('Отправить свою локацию 🗺️', request_location=True)]
 
-
+conn = sqlite3.connect('db.sqlite')
+cur = conn.cursor()
 
 def start(update, context):
     user_id = update.message.chat_id
@@ -60,7 +61,7 @@ def uzb(update, context):
 
     for us in users:
         if user_id == us.id:
-            us.set_lang('uz')
+            us.set_lang('uzb')
 
     name = update.callback_query.from_user.first_name
     cur.execute(update_app_lang.format('uzb', user_id))
@@ -84,12 +85,12 @@ def get_contact( update, context):
 def get_location(update, context):
         user_id = update.message.chat_id
         location = update.message.location
-        print(location)
+
         for us in users:
             if user_id == us.id:
                 us.set_location(location)
 
-        context.bot.send_message(chat_id=user_id, text='Спасибо, мы получили Ваши данные.', reply_markup=ReplyKeyboardMarkup([menu_button]))
+        context.bot.send_message(chat_id=user_id, text='Спасибо, мы получили Ваши данные.', reply_markup=ReplyKeyboardMarkup(menu_button, resize_keyboard= True))
 
 
 

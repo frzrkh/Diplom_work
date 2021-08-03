@@ -20,6 +20,7 @@ SELECT App_lang
 FROM Users 
 WHERE TG_ID
 '''
+
 update_fullname='''
 UPDATE Users
 SET Fullnane = '{}'

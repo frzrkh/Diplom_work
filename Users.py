@@ -30,13 +30,16 @@ class User(object):
 users = []
 
 class Tovar(object):
-    def __init__(self, name, cost):
+    def __init__(self, name, cost, id):
         self.cost = cost
         self.name = name
+        self.id = id
 
     def __str__(self):
         return '{}, {} сум'.format(self.name, self.cost)
 
-sumka = Tovar('Сумка для роддома', 349115)
+sumka = Tovar('Сумка для роддома', 349115, 'sumka_rm')
 
-shamp = Tovar('Шампунь', 16000)
+shamp = Tovar('Шампунь', 16000, 'shamp_rm')
+
+chistin = Tovar('Чистин Универсал', 15000, 'chistin_rm')
